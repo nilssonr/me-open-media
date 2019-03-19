@@ -1,9 +1,5 @@
 const axios = require('axios');
 
-let options = {
-
-};
-
 module.exports = {
     addRequest: (request) => {
         return axios.post('http://10.105.79.58:12615/OpenMediaServiceRest/requests/add', request)
