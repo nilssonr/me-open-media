@@ -11,11 +11,39 @@ let testParams = {
             }
         ],
         TenantID: -1
+    },
+    setOptionsRequest: {
+        TypeOfSession: 255,
+        AgentActionOptions: 1,
+        CloseTabOptions: 1,
+        MaxNumberOfSessions: 1,
+        AllowDifferentTypes: 1,
+        SessionLinkOptions: 1
     }
 };
 
 describe('#meOpenMedia()', () => {
     var addedRequest;
+
+    describe('Set Options', () => {
+        var promiseResponse;
+
+        before((done) => {
+            meOpenMedia.setOptions(testParams.setOptionsRequest)
+                .then((res) => {
+                    promiseResponse = res;
+                    done();
+                });
+        });
+
+        it('Returns 200', () => {
+            expect(promiseResponse.status).to.eq(200);
+        });
+
+        it('Options are set', () => {
+            expect(promiseResponse.data).to.eq(true);
+        });
+    });
 
     describe('Add Request', () => {      
         before((done) => {

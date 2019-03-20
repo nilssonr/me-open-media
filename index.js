@@ -44,8 +44,19 @@ module.exports = {
 
     },
 
-    setOptions: () => {
-
+    setOptions: (request) => {
+        return axios.default.put('http://10.105.79.58:12615/OpenMediaServiceRest/options', request)
+            .then((res) => {
+                return new Promise((resolve) => {
+                    resolve({
+                        status: res.status,
+                        data: res.data
+                    });
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     },
 
     getOpenMediaRequestStatusById: (id) => {
