@@ -9,7 +9,8 @@ const testParams = {
                 Data: 'Data1',
                 Label: 'Label1'
             }
-        ]
+        ],
+        TenantID: -1
     }
 };
 
@@ -83,6 +84,26 @@ describe('#meOpenMedia()', () => {
 
         it('Returns the inserted Service Group ID', () => {
             expect(promiseResponse.data.ServiceGroupID).to.eq(testParams.addRequest.ServiceGroupID);
+        });
+    });
+
+    describe('Get all Service Groups by Tenant ID', () => {
+        var promiseResponse;
+
+        before((done) => {
+            meOpenMedia.getAllOpenMediaServiceGroupStatus(testParams.addRequest.TenantID)
+                .then((result) => {
+                    promiseResponse = result;
+                    done();
+                });
+        });
+
+        it('Returns 200', () => {
+            expect(promiseResponse.status).to.eq(200);
+        });
+
+        it('Returns a status array', () => {
+            expect(promiseResponse.data.Status).to.not.eq(null);
         });
     });
 });
