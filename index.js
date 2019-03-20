@@ -1,153 +1,92 @@
 const axios = require('axios');
 
+const httpRequest = (params) => {
+    return axios.default.request(params)
+        .then((res) => {
+            return new Promise((resolve) => {
+                resolve({
+                    status: res.status,
+                    data: res.data
+                });
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
+
 module.exports = {
     addRequest: (request) => {
-        return axios.default.post('http://10.105.79.58:12615/OpenMediaServiceRest/requests/add', request)
-            .then((res) => {
-                return new Promise((resolve) => {
-                    resolve({
-                        status: res.status,
-                        data: res.data
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return httpRequest({
+            url: 'http://10.105.79.58:12615/OpenMediaServiceRest/requests/add',
+            method: 'POST',
+            data: request
+        });
     },
     
     cancelRequest: (request) => {
-        return axios.default.delete('http://10.105.79.58:12615/OpenMediaServiceRest/requests/cancel', { data: request})
-            .then((res) => {
-                return new Promise((resolve) => {
-                    resolve({
-                        status: res.status,
-                        data: res.data
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return httpRequest({
+            url: 'http://10.105.79.58:12615/OpenMediaServiceRest/requests/cancel',
+            method: 'DELETE',
+            data: request
+        });
     },
 
     divertRequest: (request) => {
-        return axios.default.post('http://10.105.79.58:12615/OpenMediaServiceRest/requests', request)
-            .then((res) => {
-                return new Promise((resolve) => {
-                    resolve({
-                        status: res.status,
-                        data: res.data
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return httpRequest({
+            url: 'http://10.105.79.58:12615/OpenMediaServiceRest/requests',
+            method: 'POST',
+            data: request
+        });
     },
 
     setOptions: (request) => {
-        return axios.default.put('http://10.105.79.58:12615/OpenMediaServiceRest/options', request)
-            .then((res) => {
-                return new Promise((resolve) => {
-                    resolve({
-                        status: res.status,
-                        data: res.data
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return httpRequest({
+            url: 'http://10.105.79.58:12615/OpenMediaServiceRest/options',
+            method: 'PUT',
+            data: request
+        });
     },
 
     getOpenMediaRequestStatusById: (id) => {
-        return axios.default.get(`http://10.105.79.58:12615/OpenMediaServiceRest/requests?id=${id}`)
-            .then((res) => {
-                return new Promise((resolve) => {
-                    resolve({
-                        status: res.status,
-                        data: res.data
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return httpRequest({
+            url: `http://10.105.79.58:12615/OpenMediaServiceRest/requests?id=${id}`,
+            method: 'GET'
+        });
     },
 
     getOpenMediaRequestHistoryById: (request) => {
-        return axios.default.get(`http://10.105.79.58:12615/OpenMediaServiceRest/requests/history?id=${request.OpenMediaID}&laterThan=${request.retrieveLaterThan}`)
-            .then((res) => {
-                return new Promise((resolve) => {
-                    resolve({
-                        status: res.status,
-                        data: res.data
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return httpRequest({
+            url: `http://10.105.79.58:12615/OpenMediaServiceRest/requests/history?id=${request.OpenMediaID}&laterThan=${request.retrieveLaterThan}`,
+            method: 'GET'
+        });
     },
 
     getOpenMediaRequestByTime: (time) => {
-        return axios.default.get(`http://10.105.79.58:12615/OpenMediaServiceRest/requests/time?laterThan=${time}`)
-            .then((res) => {
-                return new Promise((resolve) => {
-                    resolve({
-                        status: res.status,
-                        data: res.data
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return httpRequest({
+            url: `http://10.105.79.58:12615/OpenMediaServiceRest/requests/time?laterThan=${time}`,
+            method: 'GET'
+        });
     },
 
     getAllOpenMediaRequestStatus: () => {
-        return axios.default.get('http://10.105.79.58:12615/OpenMediaServiceRest/requests')
-            .then((res) => {
-                return new Promise((resolve) => {
-                    resolve({
-                        status: res.status,
-                        data: res.data
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return httpRequest({
+            url: 'http://10.105.79.58:12615/OpenMediaServiceRest/requests',
+            method: 'GET'
+        });
     },
 
     getServiceGroupStatus: (id) => {
-        return axios.default.get(`http://10.105.79.58:12615/OpenMediaServiceRest/serviceGroups?id=${id}`)
-            .then((res) => {
-                return new Promise((resolve) => {
-                    resolve({
-                        status: res.status,
-                        data: res.data
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return httpRequest({
+            url: `http://10.105.79.58:12615/OpenMediaServiceRest/serviceGroups?id=${id}`,
+            method: 'GET'
+        });
     },
 
     getAllOpenMediaServiceGroupStatus: (id) => {
-        return axios.default.get(`http://10.105.79.58:12615/OpenMediaServiceRest/serviceGroups/tenant?id=${id}`)
-            .then((res) => {
-                return new Promise((resolve) => {
-                    resolve({
-                        status: res.status,
-                        data: res.data
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return httpRequest({
+            url: `http://10.105.79.58:12615/OpenMediaServiceRest/serviceGroups/tenant?id=${id}`,
+            method: 'GET'
+        });
     }
 }
