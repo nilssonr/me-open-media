@@ -106,4 +106,29 @@ describe('#meOpenMedia()', () => {
             expect(promiseResponse.data.Status).to.not.eq(null);
         });
     });
+
+    describe('Get all Open Media requests', () => {
+        var promiseResponse;
+
+        before((done) => {
+            meOpenMedia.getAllOpenMediaRequestStatus()
+                .then((result) => {
+                    promiseResponse = result;
+                    done();
+                });
+        });
+
+        it('Returns 200', () => {
+            expect(promiseResponse.status).to.eq(200);
+        });
+
+        it('Returns an array of Open Media Requests', () => {
+            expect(promiseResponse.data.OpenMediaRequests).to.not.eq(null);
+        });
+
+        it('Returns the previously added request', () => {
+            const i = promiseResponse.data.OpenMediaRequests.findIndex(x => x.ID == addedRequest.data.OpenMediaID);
+            expect(i).to.be.above(-1);
+        });
+    });
 });
