@@ -1,7 +1,7 @@
 let meOpenMedia = require('../index'),
     expect = require('chai').expect;
 
-const testParams = {
+let testParams = {
     addRequest: {
         ServiceGroupID: 3,
         IVRInfo: [
@@ -129,6 +129,32 @@ describe('#meOpenMedia()', () => {
         it('Returns the previously added request', () => {
             const i = promiseResponse.data.OpenMediaRequests.findIndex(x => x.ID == addedRequest.data.OpenMediaID);
             expect(i).to.be.above(-1);
+        });
+    });
+
+    describe('Cancels the request', () => {
+        var promiseResponse;
+
+        before((done) => {
+            const request = {
+                CancelIfAllocated: true,
+                DoNotReport: true,
+                OpenMediaID: addedRequest.data.OpenMediaID
+            };
+
+            meOpenMedia.cancelRequest(request)
+                .then((result) => {
+                    promiseResponse = result;
+                    done();
+                });
+        });
+
+        it('Returns 200', () => {
+            expect(promiseResponse.status).to.eq(200);
+        });
+
+        it('Removes the request', () => {
+            expect(promiseResponse.data).to.eq(true);
         });
     });
 });
