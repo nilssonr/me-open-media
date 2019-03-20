@@ -76,8 +76,19 @@ module.exports = {
             });
     },
 
-    getOpenMediaRequestHistoryById: () => {
-
+    getOpenMediaRequestHistoryById: (request) => {
+        return axios.default.get(`http://10.105.79.58:12615/OpenMediaServiceRest/requests/history?id=${request.OpenMediaID}&laterThan=${request.retrieveLaterThan}`)
+            .then((res) => {
+                return new Promise((resolve) => {
+                    resolve({
+                        status: res.status,
+                        data: res.data
+                    });
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     },
 
     getOpenMediaRequestByTime: (time) => {

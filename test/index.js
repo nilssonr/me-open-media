@@ -180,6 +180,26 @@ describe('#meOpenMedia()', () => {
         });
     });
 
+    describe('Get Open Media request history by id', () => {
+        var promiseResponse;
+        before((done) => {
+            const request = {
+                OpenMediaID: addedRequest.data.OpenMediaID,
+                RetrieveLaterThan: new Date(new Date().getDate() - 100000).toUTCString()
+            };
+            done();
+        });
+
+        it('Returns 200', () => {
+            expect(promiseResponse.status).to.eq(200);
+        });
+
+        it('Returns the previously added request', () => {
+            const i = promiseResponse.data.OpenMediaRequests.findIndex(x => x.ID == addedRequest.data.OpenMediaID);
+            expect(i).to.be.above(-1);
+        });
+    });
+
     // describe('Divert the request', () => {
     //     var promiseResponse;
 
@@ -200,6 +220,8 @@ describe('#meOpenMedia()', () => {
     //         expect(promiseResponse.status).to.eq(200);
     //     });
     // });
+
+
 
     describe('Cancels the request', () => {
         var promiseResponse;
