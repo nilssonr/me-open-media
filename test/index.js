@@ -180,6 +180,27 @@ describe('#meOpenMedia()', () => {
         });
     });
 
+    // describe('Divert the request', () => {
+    //     var promiseResponse;
+
+    //     before((done) => {
+    //         const request = {
+    //             OpenMediaID: addedRequest.data.OpenMediaID,
+    //             ServiceGroupID: 4
+    //         };
+            
+    //         meOpenMedia.divertRequest(request)
+    //             .then((res) => {
+    //                 promiseResponse = res;
+    //                 done();
+    //             });
+    //     });
+
+    //     it('Returns 200', () => {
+    //         expect(promiseResponse.status).to.eq(200);
+    //     });
+    // });
+
     describe('Cancels the request', () => {
         var promiseResponse;
 
