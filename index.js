@@ -31,15 +31,6 @@ module.exports = {
             });
     },
 
-    cancelAllOpenMediaRequests: () => {
-        const requests = getAllOpenMediaRequestStatus()
-            .then((res) => {
-                for(let request of res.data.OpenMediaRequests) {
-
-                }
-            });
-    },
-
     divertRequest: () => {
 
     },
@@ -78,8 +69,19 @@ module.exports = {
 
     },
 
-    getOpenMediaRequestByTime: () => {
-
+    getOpenMediaRequestByTime: (time) => {
+        return axios.default.get(`http://10.105.79.58:12615/OpenMediaServiceRest/requests/time?laterThan=${time}`)
+            .then((res) => {
+                return new Promise((resolve) => {
+                    resolve({
+                        status: res.status,
+                        data: res.data
+                    });
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     },
 
     getAllOpenMediaRequestStatus: () => {

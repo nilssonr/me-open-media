@@ -160,6 +160,26 @@ describe('#meOpenMedia()', () => {
         });
     });
 
+    describe('Get all Open Media requests by time', () => {
+        var promiseResponse;
+        before((done) => {
+            meOpenMedia.getOpenMediaRequestByTime(new Date(new Date().getDate() - 100000).toUTCString())
+                .then((res) => {
+                    promiseResponse = res;
+                    done();
+                })
+        });
+
+        it('Returns 200', () => {
+            expect(promiseResponse.status).to.eq(200);
+        });
+
+        it('Returns the previously added request', () => {
+            const i = promiseResponse.data.OpenMediaRequests.findIndex(x => x.ID == addedRequest.data.OpenMediaID);
+            expect(i).to.be.above(-1);
+        });
+    });
+
     describe('Cancels the request', () => {
         var promiseResponse;
 
