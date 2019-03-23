@@ -183,11 +183,14 @@ describe('#meOpenMedia()', () => {
     describe('Get Open Media request history by id', () => {
         var promiseResponse;
         before((done) => {
-            const request = {
+            meOpenMedia.getOpenMediaRequestHistoryById({
                 OpenMediaID: addedRequest.data.OpenMediaID,
-                RetrieveLaterThan: new Date(new Date().getDate() - 100000).toUTCString()
-            };
-            done();
+                RetrieveLaterThan: new Date(new Date().getDate()).toLocaleString()
+            })
+            .then((res) => {
+                promiseResponse = res;
+                done();
+            });
         });
 
         it('Returns 200', () => {

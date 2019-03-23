@@ -57,7 +57,7 @@ module.exports = {
 
     getOpenMediaRequestHistoryById: (request) => {
         return httpRequest({
-            url: `http://10.105.79.58:12615/OpenMediaServiceRest/requests/history?id=${request.OpenMediaID}&laterThan=${request.retrieveLaterThan}`,
+            url: `http://10.105.79.58:12615/OpenMediaServiceRest/requests/history?ID=${request.OpenMediaID}&RetrieveLaterThan=${request.RetrieveLaterThan}`,
             method: 'GET'
         });
     },
