@@ -164,7 +164,7 @@ describe('#meOpenMedia()', () => {
     describe('Get all Open Media requests by time', () => {
         var promiseResponse;
         before((done) => {
-            client.getOpenMediaRequestByTime(new Date(new Date().getDate() - 100000).toUTCString())
+            client.getOpenMediaRequestsByTime(new Date(new Date().getDate() - 100000).toUTCString())
                 .then((res) => {
                     promiseResponse = res;
                     done();
@@ -231,13 +231,7 @@ describe('#meOpenMedia()', () => {
         var promiseResponse;
 
         before((done) => {
-            const request = {
-                CancelIfAllocated: true,
-                DoNotReport: true,
-                OpenMediaID: addedRequest.data.OpenMediaID
-            };
-
-            client.cancelRequest(request)
+            client.cancelRequest(true, true, addedRequest.data.OpenMediaRequests)
                 .then((result) => {
                     promiseResponse = result;
                     done();
