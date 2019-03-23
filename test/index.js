@@ -1,4 +1,5 @@
-let meOpenMedia = require('../index'),
+let MeOpenMedia = require('../index'),
+    client = new MeOpenMedia(),
     expect = require('chai').expect;
 
 let testParams = {
@@ -29,7 +30,7 @@ describe('#meOpenMedia()', () => {
         var promiseResponse;
 
         before((done) => {
-            meOpenMedia.setOptions(testParams.setOptionsRequest)
+            client.setOptions(testParams.setOptionsRequest)
                 .then((res) => {
                     promiseResponse = res;
                     done();
@@ -47,7 +48,7 @@ describe('#meOpenMedia()', () => {
 
     describe('Add Request', () => {      
         before((done) => {
-            meOpenMedia.addRequest(testParams.addRequest)
+            client.addRequest(testParams.addRequest)
                 .then((result) => {                
                     addedRequest = result;
                     done();
@@ -71,7 +72,7 @@ describe('#meOpenMedia()', () => {
         var promiseResponse;
 
         before((done) => {
-            meOpenMedia.getOpenMediaRequestStatusById(addedRequest.data.OpenMediaID)
+            client.getOpenMediaRequestStatusById(addedRequest.data.OpenMediaID)
                 .then((result) => {
                     promiseResponse = result;
                     done();
@@ -95,7 +96,7 @@ describe('#meOpenMedia()', () => {
         var promiseResponse;
 
         before((done) => {
-            meOpenMedia.getServiceGroupStatus(testParams.addRequest.ServiceGroupID)
+            client.getServiceGroupStatus(testParams.addRequest.ServiceGroupID)
                 .then((result) => {
                     promiseResponse = result;
                     done();
@@ -119,7 +120,7 @@ describe('#meOpenMedia()', () => {
         var promiseResponse;
 
         before((done) => {
-            meOpenMedia.getAllOpenMediaServiceGroupStatus(testParams.addRequest.TenantID)
+            client.getAllOpenMediaServiceGroupStatus(testParams.addRequest.TenantID)
                 .then((result) => {
                     promiseResponse = result;
                     done();
@@ -139,7 +140,7 @@ describe('#meOpenMedia()', () => {
         var promiseResponse;
 
         before((done) => {
-            meOpenMedia.getAllOpenMediaRequestStatus()
+            client.getAllOpenMediaRequestStatus()
                 .then((result) => {
                     promiseResponse = result;
                     done();
@@ -163,7 +164,7 @@ describe('#meOpenMedia()', () => {
     describe('Get all Open Media requests by time', () => {
         var promiseResponse;
         before((done) => {
-            meOpenMedia.getOpenMediaRequestByTime(new Date(new Date().getDate() - 100000).toUTCString())
+            client.getOpenMediaRequestByTime(new Date(new Date().getDate() - 100000).toUTCString())
                 .then((res) => {
                     promiseResponse = res;
                     done();
@@ -183,7 +184,7 @@ describe('#meOpenMedia()', () => {
     describe('Get Open Media request history by id', () => {
         var promiseResponse;
         before((done) => {
-            meOpenMedia.getOpenMediaRequestHistoryById({
+            client.getOpenMediaRequestHistoryById({
                 OpenMediaID: addedRequest.data.OpenMediaID,
                 RetrieveLaterThan: new Date(new Date().getDate()).toLocaleString()
             })
@@ -236,7 +237,7 @@ describe('#meOpenMedia()', () => {
                 OpenMediaID: addedRequest.data.OpenMediaID
             };
 
-            meOpenMedia.cancelRequest(request)
+            client.cancelRequest(request)
                 .then((result) => {
                     promiseResponse = result;
                     done();

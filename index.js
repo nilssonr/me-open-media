@@ -15,7 +15,11 @@ const httpRequest = (params) => {
         });
 };
 
-module.exports = {
+function MeOpenMedia() {
+
+};
+
+MeOpenMedia.prototype = {
     addRequest: (request) => {
         return httpRequest({
             url: 'http://10.105.79.58:12615/OpenMediaServiceRest/requests/add',
@@ -23,7 +27,7 @@ module.exports = {
             data: request
         });
     },
-    
+
     cancelRequest: (request) => {
         return httpRequest({
             url: 'http://10.105.79.58:12615/OpenMediaServiceRest/requests/cancel',
@@ -88,5 +92,7 @@ module.exports = {
             url: `http://10.105.79.58:12615/OpenMediaServiceRest/serviceGroups/tenant?id=${id}`,
             method: 'GET'
         });
-    }
-}
+    }  
+} 
+
+module.exports = MeOpenMedia;
