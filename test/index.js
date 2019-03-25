@@ -205,13 +205,8 @@ describe('#meOpenMedia()', () => {
     // describe('Divert the request', () => {
     //     var promiseResponse;
 
-    //     before((done) => {
-    //         const request = {
-    //             OpenMediaID: addedRequest.data.OpenMediaID,
-    //             ServiceGroupID: 4
-    //         };
-            
-    //         meOpenMedia.divertRequest(request)
+    //     before((done) => {          
+    //         client.divertRequest(addedRequest.data.OpenMediaID, 4)
     //             .then((res) => {
     //                 promiseResponse = res;
     //                 done();

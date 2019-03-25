@@ -57,11 +57,14 @@ export class MeOpenMedia {
      * @example divertRequest({ OpenMediaID: 1, ServiceGroupID: 1, TenantID: -1, ServiceGroupName: 'OpenMedia One'})
      * @param {Object} request - See documentation for parameters.
      */
-    divertRequest(request) {
+    divertRequest(openMediaId, serviceGroupId) {
         return this._httpRequest({
             url: `${this.url}/OpenMediaServiceRest/requests`,
             method: 'POST',
-            data: request
+            data: {
+                OpenMediaID: openMediaId,
+                ServiceGroupID: serviceGroupId
+            }
         });
     }
 
