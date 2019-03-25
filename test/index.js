@@ -1,6 +1,6 @@
-let MeOpenMedia = require('../index'),
-    client = new MeOpenMedia(),
-    expect = require('chai').expect;
+
+import { MeOpenMedia } from '../src/index';
+import { expect } from 'chai';
 
 let testParams = {
     addRequest: {
@@ -25,6 +25,7 @@ let testParams = {
 
 describe('#meOpenMedia()', () => {
     var addedRequest;
+    const client = new MeOpenMedia('http://10.105.79.58:12615');
 
     describe('Set Options', () => {
         var promiseResponse;
