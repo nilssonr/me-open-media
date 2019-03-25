@@ -1,6 +1,6 @@
 {
   "name": "me-open-media",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MiCC Enterprise Open Media Client",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,9 @@
     "url": "https://github.com/nilssonr/me-open-media/issues"
   },
   "homepage": "https://github.com/nilssonr/me-open-media#readme",
+  "files": [
+    "/dist/index.js"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.4.0",
