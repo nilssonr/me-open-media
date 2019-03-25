@@ -8,3 +8,7 @@ me-open-media
 ## Testing
 
     npm test
+
+## Building
+
+    npm run build
