@@ -1,8 +1,6 @@
 import * as axios from 'axios';
 
 export class MeOpenMedia {
-    
-    
     /**
      * @example new MeOpenMedia('https://127.0.0.1:12615');
      * @param {string} url - The Open Media Service Rest API url, see example.
